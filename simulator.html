@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FADEC Engine CBT Simulator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <div class="brand">
+    <div class="brand-mark">
+      <img
+        src="logo.png"
+        alt="AMT 102 Project Making logo"
+        class="project-logo"
+      >
+    </div>
+
+    <div>
+      <h1>FADEC ENGINE CBT SIMULATOR</h1>
+      <p>FULL AUTHORITY DIGITAL ENGINE CONTROL</p>
+    </div>
+  </div>
+
+  <div class="top-status">
+
+    <div class="status-card">
+      <span>ENGINE STATUS</span>
+      <strong id="engineTop">OFF</strong>
+    </div>
+
+    <div class="status-card">
+      <span>FADEC STATUS</span>
+      <strong id="fadecTop">OFF</strong>
+    </div>
+
+  </div>
+
+  <div class="top-actions">
+
+    <button id="soundBtn" class="top-action">
+      🔊
+      <small>SOUND</small>
+    </button>
+
+    <button id="themeBtn" class="top-action">
+      ◉
+      <small>THEME</small>
+    </button>
+
+    <button id="helpBtn" class="top-action">
+      ?
+      <small>HELP</small>
+    </button>
+
+    <button id="phoneUiBtn" class="top-action phone-ui-btn" aria-pressed="false">
+      📱
+      <small>PHONE UI</small>
+    </button>
+
+    <button id="homeBtn" class="top-action">
+      ⌂
+      <small>HOME</small>
+    </button>
+
+    <button id="exitBtn" class="exit-action">
+      ⏻
+      <small>EXIT</small>
+    </button>
+
+  </div>
+
+</header>
+
+
+<main class="dashboard">
+
+
+<!-- =====================================================
+     LEFT COLUMN
+===================================================== -->
+
+<section class="left-column">
+
+
+  <!-- WARNING PANEL -->
+
+  <div id="warningBox" class="panel warning-panel normal">
+
+    <div class="panel-title">
+      WARNING PANEL
+    </div>
+
+    <div class="warning-content">
+
+      <div class="warning-symbol">
+
+        <svg viewBox="0 0 100 90">
+
+          <path
+            d="M50 5 L96 84 Q98 89 92 89 H8 Q2 89 4 84 Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="5"
+          />
+
+          <path
+            d="M50 20 V55"
+            stroke="currentColor"
+            stroke-width="9"
+            stroke-linecap="round"
+          />
+
+          <circle
+            cx="50"
+            cy="70"
+            r="5"
+            fill="currentColor"
+          />
+
+        </svg>
+
+      </div>
+
+      <div class="warning-copy">
+
+        <strong id="warningText">
+          SYSTEM NORMAL
+        </strong>
+
+        <span id="warningSub">
+          No abnormal parameter detected.
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- FAULT LOG -->
+
+  <div class="panel fault-panel">
+
+    <div class="split-header">
+
+      <span>FAULT LOG</span>
+
+      <span id="faultCount">
+        0 FAULTS
+      </span>
+
+    </div>
+
+    <div id="faultLog" class="fault-log">
+
+      <div class="fault-row">
+
+        <span>---</span>
+
+        <span>NO FAULTS</span>
+
+        <span>--:--:--</span>
+
+      </div>
+
+    </div>
+
+    <div class="fault-total">
+
+      TOTAL FAULTS:
+      <strong id="faultTotal">0</strong>
+
+    </div>
+
+  </div>
+
+
+  <!-- DIAGNOSTIC -->
+
+  <div class="panel diagnostic-panel">
+
+    <div class="split-header">
+
+      <span>DIAGNOSTIC RESULT</span>
+
+      <span class="green-text">
+        FADEC
+      </span>
+
+    </div>
+
+
+    <div class="diagnostic-list">
+
+      <div>
+        <span>N1</span>
+        <strong id="diagN1">
+          ✓ NORMAL
+        </strong>
+      </div>
+
+      <div>
+        <span>N2</span>
+        <strong id="diagN2">
+          ✓ NORMAL
+        </strong>
+      </div>
+
+      <div>
+        <span>EGT</span>
+        <strong id="diagEGT">
+          ✓ NORMAL
+        </strong>
+      </div>
+
+      <div>
+        <span>PRESSURE</span>
+        <strong id="diagPressure">
+          ✓ NORMAL
+        </strong>
+      </div>
+
+      <div>
+        <span>FUEL FLOW</span>
+        <strong id="diagFuel">
+          ✓ NORMAL
+        </strong>
+      </div>
+
+    </div>
+
+
+    <div id="diagResult" class="diagnostic-result">
+      WAITING FOR DIAGNOSTIC
+    </div>
+
+
+    <button id="diagBtn" class="thin-action cyan">
+      RUN DIAGNOSTIC
+    </button>
+
+    <button id="ackBtn" class="thin-action amber">
+      ACKNOWLEDGE WARNING
+    </button>
+
+  </div>
+
+
+  <!-- CBT -->
+
+  <div class="panel assessment">
+
+    <div class="split-header">
+
+      <span>CBT ASSESSMENT</span>
+
+      <span id="score">
+        SCORE 0/4
+      </span>
+
+    </div>
+
+
+    <p id="quizQuestion">
+      Question 1 of 4: What should the FADEC system determine when a programmed operating limit is exceeded?
+    </p>
+
+
+    <div class="answers">
+
+      <button data-answer="A">A. AIRWORTHY</button>
+
+      <button data-answer="B">B. REQUIRES MAINTENANCE</button>
+
+      <button data-answer="C">C. NORMAL</button>
+
+      <button data-answer="D">D. IGNORE THE WARNING</button>
+
+    </div>
+
+
+    <div id="quizResult" class="quiz-result">
+      ASSESSMENT READY — 4 QUESTIONS
+    </div>
+
+  </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     CENTER COLUMN
+===================================================== -->
+
+<section class="center-column">
+
+
+<div class="mcdu-shell">
+
+
+  <!-- LEFT LINE SELECTORS -->
+
+  <div class="line-selectors left-selectors">
+
+    <button class="ls-key">◀</button>
+    <button class="ls-key">◀</button>
+    <button class="ls-key">◀</button>
+
+    <button class="ls-key blank"></button>
+    <button class="ls-key blank"></button>
+
+  </div>
+
+
+  <!-- MCDU -->
+
+  <div class="mcdu-body">
+
+    <div class="mcdu-frame">
+
+
+      <!-- HEADER -->
+
+      <div class="mcdu-header">
+
+        <span class="mcdu-brand">
+          FADEC
+        </span>
+
+        <span>
+          ENGINE 1
+        </span>
+
+        <strong id="pageNo">
+          1 / 4
+        </strong>
+
+      </div>
+
+
+      <!-- SCREEN -->
+
+      <div id="mcduScreen" class="mcdu-screen">
+      </div>
+
+
+      <!-- NAVIGATION -->
+
+      <div class="mcdu-nav">
+
+        <button data-page="engine">ENGINE</button>
+        <button data-page="fadec">FADEC</button>
+        <button data-page="events">EVENT LOG</button>
+        <button data-page="diagnostic">DIAGNOSTIC</button>
+        <button data-page="engine">HOME</button>
+        <button data-page="fadec">STATUS</button>
+
+      </div>
+
+
+      <!-- KEYPAD -->
+
+      <div class="mcdu-keypad">
+
+        <button data-key="1">1</button>
+        <button data-key="2">2</button>
+        <button data-key="3">3</button>
+        <button data-key="4">4</button>
+        <button data-key="5">5</button>
+
+        <button data-key="6">6</button>
+        <button data-key="7">7</button>
+        <button data-key="8">8</button>
+        <button data-key="9">9</button>
+        <button data-key="0">0</button>
+
+        <button data-key="A">A</button>
+        <button data-key="B">B</button>
+        <button data-key="C">C</button>
+        <button data-key="D">D</button>
+        <button data-key="E">E</button>
+
+        <button data-key="F">F</button>
+        <button data-key="G">G</button>
+        <button data-key="H">H</button>
+        <button data-key="I">I</button>
+        <button data-key="J">J</button>
+
+        <button data-key="SP">SP</button>
+        <button data-key="DEL">DEL</button>
+        <button data-key="CLR">CLR</button>
+        <button data-key="ENT">ENT</button>
+        <button data-key="MENU">MENU</button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- RIGHT LINE SELECTORS -->
+
+  <div class="line-selectors right-selectors">
+
+    <button class="ls-key">▶</button>
+    <button class="ls-key">▶</button>
+    <button class="ls-key">▶</button>
+
+    <button class="ls-key blank"></button>
+    <button class="ls-key blank"></button>
+
+  </div>
+
+</div>
+
+
+
+<!-- SYSTEM GUIDE -->
+
+<div class="panel sound-panel">
+
+  <div class="split-header">
+
+    <span>
+      SOUND INDICATOR
+    </span>
+
+    <span>
+      SYSTEM GUIDE
+    </span>
+
+  </div>
+
+
+  <div class="bottom-guides">
+
+
+    <div class="sound-indicators">
+
+      <div id="inputLamp">
+        <i>◖)))</i>
+        <span>NORMAL SOUND</span>
+        <b>Beep!</b>
+      </div>
+
+      <div id="cautionLamp">
+        <i>◖)))</i>
+        <span>CAUTION SOUND</span>
+        <b>Caution!</b>
+      </div>
+
+      <div id="warningLamp">
+        <i>◖)))</i>
+        <span>WARNING SOUND</span>
+        <b>Warning!</b>
+      </div>
+
+    </div>
+
+
+    <div class="guide-text">
+
+      <ol>
+
+        <li>
+          Start the engine.
+        </li>
+
+        <li>
+          Adjust the air volume.
+        </li>
+
+        <li>
+          Observe engine parameters.
+        </li>
+
+        <li>
+          Check warnings and faults.
+        </li>
+
+        <li>
+          Run diagnosis if needed.
+        </li>
+
+        <li>
+          Determine Airworthy or Requires Maintenance.
+        </li>
+
+      </ol>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     RIGHT COLUMN
+===================================================== -->
+
+<section class="right-column">
+
+
+<!-- ENGINE CONTROL -->
+
+<div class="panel engine-control-panel">
+
+  <div class="panel-title">
+    ENGINE CONTROL
+  </div>
+
+
+  <div class="control-buttons">
+
+    <button id="startBtn"
+            class="control green">
+
+      <span>▶</span>
+
+      START
+      <br>
+      ENGINE
+
+    </button>
+
+
+    <button id="stopBtn"
+            class="control red">
+
+      <span>■</span>
+
+      STOP
+      <br>
+      ENGINE
+
+    </button>
+
+
+    <button id="resetBtn"
+            class="control blue">
+
+      <span>↻</span>
+
+      RESET
+
+    </button>
+
+  </div>
+
+</div>
+
+
+
+<!-- AIR VOLUME / AIRCRAFT-STYLE THROTTLE CONTROL -->
+<div class="panel air-volume-panel">
+  <div class="panel-title">THROTTLE / AIR VOLUME</div>
+  <div id="airSlider" class="aircraft-throttle" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="10" aria-label="Engine air volume control">
+    <div class="throttle-scale">
+      <span class="throttle-label toga">TOGA</span>
+      <span class="throttle-label max">MAX</span>
+      <span class="throttle-label climb">CLB</span>
+      <span class="throttle-label cruise">CRZ</span>
+      <span class="throttle-label idle">IDLE</span>
+    </div>
+    <div class="throttle-gate">
+      <div class="throttle-detents" aria-hidden="true">
+        <i style="bottom:0%"></i><i style="bottom:20%"></i><i style="bottom:40%"></i>
+        <i style="bottom:60%"></i><i style="bottom:80%"></i><i style="bottom:100%"></i>
+      </div>
+      <div id="airThrottleFill" class="throttle-fill"></div>
+      <div id="airKnob" class="throttle-handle" aria-hidden="true"><span>THR</span></div>
+    </div>
+    <div class="throttle-readout">
+      <strong id="airDisplay">10%</strong>
+      <span>AIR VOLUME</span>
+      <small id="throttleMode">IDLE / LOW POWER</small>
+    </div>
+  </div>
+  <input id="airVolume" class="accessible-range" type="range" min="0" max="100" value="10" aria-label="Air volume numeric input" tabindex="-1">
+  <div class="slider-caption">DRAG THROTTLE • ARROW KEYS • HOME / END</div>
+</div>
+
+<!-- LIVE GAUGES -->
+
+<div class="panel live-panel">
+
+  <div class="panel-title">
+    ENGINE PARAMETERS — LIVE
+  </div>
+
+
+  <div class="gauge-grid">
+
+
+    <!-- N1 -->
+
+    <div
+      class="gauge"
+      data-gauge="n1"
+    >
+
+      <svg viewBox="0 0 180 180">
+
+        <circle
+          class="gauge-ring"
+          cx="90"
+          cy="90"
+          r="68"
+          pathLength="100"
+        />
+
+        <circle
+          class="gauge-progress"
+          id="gaugeN1"
+          cx="90"
+          cy="90"
+          r="68"
+          pathLength="100"
+        />
+
+        <circle
+          class="gauge-inner"
+          cx="90"
+          cy="90"
+          r="56"
+        />
+
+      </svg>
+
+      <span class="gauge-name">
+        N1
+      </span>
+
+      <strong id="gaugeN1Value">
+        0.0 %
+      </strong>
+
+    </div>
+
+
+
+    <!-- N2 -->
+
+    <div
+      class="gauge"
+      data-gauge="n2"
+    >
+
+      <svg viewBox="0 0 180 180">
+
+        <circle
+          class="gauge-ring"
+          cx="90"
+          cy="90"
+          r="68"
+          pathLength="100"
+        />
+
+        <circle
+          class="gauge-progress"
+          id="gaugeN2"
+          cx="90"
+          cy="90"
+          r="68"
+          pathLength="100"
+        />
+
+        <circle
+          class="gauge-inner"
+          cx="90"
+          cy="90"
+          r="56"
+        />
+
+      </svg>
+
+      <span class="gauge-name">
+        N2
+      </span>
+
+      <strong id="gaugeN2Value">
+        0.0 %
+      </strong>
+
+    </div>
+
+
+
+    <!-- EGT -->
+
+    <div
+      class="gauge"
+      data-gauge="egt"
+    >
+
+      <svg viewBox="0 0 180 180">
+
+        <circle
+          class="gauge-ring"
+          cx="90"
+          cy="90"
+          r="68"
+          pathLength="100"
+        />
+
+        <circle
+          class="gauge-progress"
+          id="gaugeEGT"
+          cx="90"
+          cy="90"
+          r="68"
+          pathLength="100"
+        />
+
+        <circle
+          class="gauge-inner"
+          cx="90"
+          cy="90"
+          r="56"
+        />
+
+      </svg>
+
+      <span class="gauge-name">
+        EGT
+      </span>
+
+      <strong id="gaugeEGTValue">
+        0 °C
+      </strong>
+
+    </div>
+
+
+
+    <!-- AIRFLOW -->
+
+    <div
+      class="gauge"
+      data-gauge="airflow"
+    >
+
+      <svg viewBox="0 0 180 180">
+
+        <circle
+          class="gauge-ring"
+          cx="90"
+          cy="90"
+          r="68"
+          pathLength="100"
+        />
+
+        <circle
+          class="gauge-progress"
+          id="gaugeAirflow"
+          cx="90"
+          cy="90"
+          r="68"
+          pathLength="100"
+        />
+
+        <circle
+          class="gauge-inner"
+          cx="90"
+          cy="90"
+          r="56"
+        />
+
+      </svg>
+
+      <span class="gauge-name">
+        AIRFLOW
+      </span>
+
+      <strong id="gaugeAirflowValue">
+        0.0 %
+      </strong>
+
+    </div>
+
+
+
+    <!-- PRESSURE -->
+
+    <div
+      class="gauge"
+      data-gauge="pressure"
+    >
+
+      <svg viewBox="0 0 180 180">
+
+        <circle
+          class="gauge-ring"
+          cx="90"
+          cy="90"
+          r="68"
+          pathLength="100"
+        />
+
+        <circle
+          class="gauge-progress"
+          id="gaugePressure"
+          cx="90"
+          cy="90"
+          r="68"
+          pathLength="100"
+        />
+
+        <circle
+          class="gauge-inner"
+          cx="90"
+          cy="90"
+          r="56"
+        />
+
+      </svg>
+
+      <span class="gauge-name">
+        PRESSURE
+      </span>
+
+      <strong id="gaugePressureValue">
+        0.0 PSI
+      </strong>
+
+    </div>
+
+
+
+    <!-- FUEL FLOW -->
+
+    <div
+      class="gauge"
+      data-gauge="fuel"
+    >
+
+      <svg viewBox="0 0 180 180">
+
+        <circle
+          class="gauge-ring"
+          cx="90"
+          cy="90"
+          r="68"
+          pathLength="100"
+        />
+
+        <circle
+          class="gauge-progress"
+          id="gaugeFuel"
+          cx="90"
+          cy="90"
+          r="68"
+          pathLength="100"
+        />
+
+        <circle
+          class="gauge-inner"
+          cx="90"
+          cy="90"
+          r="56"
+        />
+
+      </svg>
+
+      <span class="gauge-name">
+        FUEL FLOW
+      </span>
+
+      <strong id="gaugeFuelValue">
+        0 KG/HR
+      </strong>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- SYSTEM MESSAGE -->
+
+<div class="panel messages-panel">
+
+  <div class="split-header">
+
+    <span>
+      SYSTEM MESSAGES
+    </span>
+
+    <button
+      id="clearLogBtn"
+      class="clear-log"
+    >
+      CLEAR
+    </button>
+
+  </div>
+
+
+  <div
+    id="eventLog"
+    class="event-log"
+  ></div>
+
+
+  <div
+    id="logCount"
+    class="log-count"
+  >
+    0 EVENTS
+  </div>
+
+</div>
+
+
+</section>
+
+</main>
+
+
+<!-- RETURN-TO-HOME LOADING SCREEN -->
+<section id="returnLoadingScreen" class="return-loading-screen" aria-hidden="true">
+  <div class="return-loading-grid"></div>
+  <div class="return-loading-content">
+    <div class="return-loading-logo"><img src="logo.png" alt="AMT 102 Project Making"></div>
+    <div class="return-loading-kicker">AMT 102 • SYSTEM SHUTDOWN</div>
+    <div class="return-loading-title">RETURNING TO HOME</div>
+    <div id="returnLoadingStatus" class="return-loading-status">SAVING SIMULATOR SESSION</div>
+    <div class="return-loading-bar"><span id="returnLoadingProgress"></span></div>
+    <div class="return-loading-percent"><span id="returnLoadingPercent">0%</span></div>
+  </div>
+</section>
+
+<script src="script.js"></script>
+
+</body>
+</html>

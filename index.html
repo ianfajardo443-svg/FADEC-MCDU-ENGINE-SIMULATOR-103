@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    FADEC + MCDU Engine CBT Simulator
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="home.css"
+  >
+
+</head>
+
+
+<body>
+
+
+  <!-- =====================================================
+       HOME SCREEN
+  ====================================================== -->
+
+  <main
+    id="homeScreen"
+    class="home-screen"
+  >
+
+
+    <!-- TOP HEADER -->
+
+    <header class="home-header">
+
+      <div class="college-brand">
+
+        <div class="brand-symbol">
+
+          <img
+            src="logo.png"
+            alt="AMT 102 Project Making logo"
+            class="project-logo"
+          >
+
+        </div>
+
+
+        <div>
+
+          <div class="college-name">
+            DPR AVIATION COLLEGE
+          </div>
+
+          <div class="task-name">
+            MAJOR PERFORMANCE TASK
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="system-indicator">
+
+        <span class="indicator-dot"></span>
+
+        <span>
+          SYSTEM READY
+        </span>
+
+        <span class="system-code">
+          FADEC-01
+        </span>
+
+      </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <section class="hero">
+
+
+      <!-- LEFT INFORMATION -->
+
+      <div class="hero-content">
+
+
+        <div class="eyebrow">
+
+          <span></span>
+
+          FULL AUTHORITY DIGITAL ENGINE CONTROL
+
+        </div>
+
+
+        <h1>
+
+          <span>
+            FADEC + MCDU
+          </span>
+
+          <strong>
+            ENGINE CBT
+            <br>
+            SIMULATOR
+          </strong>
+
+        </h1>
+
+
+        <p class="description">
+
+          A mini Full Authority Digital Engine Control
+          system with an MCDU. Move the air volume input,
+          watch sensor values respond in real time, and
+          let FADEC logic decide:
+
+        </p>
+
+
+        <div class="decision">
+
+          <span class="decision-airworthy">
+            AIRWORTHY
+          </span>
+
+          <span class="decision-divider">
+            /
+          </span>
+
+          <span class="decision-maintenance">
+            REQUIRES MAINTENANCE
+          </span>
+
+        </div>
+
+
+
+        <!-- ENTER BUTTON -->
+
+        <button
+          id="enterSimulatorBtn"
+          class="enter-button"
+          type="button"
+        >
+
+          <span class="enter-icon">
+            ▶
+          </span>
+
+          <span class="enter-text">
+
+            <strong>
+              ENTER SIMULATOR
+            </strong>
+
+            <small>
+              START TRAINING SESSION
+            </small>
+
+          </span>
+
+          <span class="enter-arrow">
+            →
+          </span>
+
+        </button>
+
+
+
+        <!-- SMALL SYSTEM FLOW -->
+
+        <div class="system-flow">
+
+          <span>
+            INPUT
+          </span>
+
+          <b>→</b>
+
+          <span>
+            SENSOR
+          </span>
+
+          <b>→</b>
+
+          <span>
+            FADEC
+          </span>
+
+          <b>→</b>
+
+          <span>
+            MCDU
+          </span>
+
+          <b>→</b>
+
+          <span>
+            DECISION
+          </span>
+
+        </div>
+
+
+      </div>
+
+
+
+      <!-- =================================================
+           RADAR DISPLAY
+      ================================================== -->
+
+      <div class="radar-area">
+
+
+        <div class="radar-frame">
+
+
+          <!-- CORNER LABELS -->
+
+          <div class="radar-label radar-label-top">
+            ENGINE CONTROL
+          </div>
+
+          <div class="radar-label radar-label-right">
+            SENSOR MONITOR
+          </div>
+
+          <div class="radar-label radar-label-bottom">
+            TRAINING MODE
+          </div>
+
+          <div class="radar-label radar-label-left">
+            MCDU LINK
+          </div>
+
+
+
+          <!-- RADAR -->
+
+          <div class="radar">
+
+
+            <div class="radar-ring ring-1"></div>
+
+            <div class="radar-ring ring-2"></div>
+
+            <div class="radar-ring ring-3"></div>
+
+            <div class="radar-ring ring-4"></div>
+
+
+            <div class="radar-cross horizontal"></div>
+
+            <div class="radar-cross vertical"></div>
+
+
+            <div class="radar-sweep"></div>
+
+
+            <div class="radar-center">
+
+              <div class="center-dot"></div>
+
+              <div class="center-pulse"></div>
+
+            </div>
+
+
+            <!-- RADAR TARGETS -->
+
+            <div class="target target-1">
+              <span></span>
+            </div>
+
+            <div class="target target-2">
+              <span></span>
+            </div>
+
+            <div class="target target-3">
+              <span></span>
+            </div>
+
+
+            <!-- RADAR MARKINGS -->
+
+            <span class="mark mark-top">
+              N
+            </span>
+
+            <span class="mark mark-right">
+              E
+            </span>
+
+            <span class="mark mark-bottom">
+              S
+            </span>
+
+            <span class="mark mark-left">
+              W
+            </span>
+
+
+            <span class="range range-1">
+              25
+            </span>
+
+            <span class="range range-2">
+              50
+            </span>
+
+            <span class="range range-3">
+              75
+            </span>
+
+            <span class="range range-4">
+              100
+            </span>
+
+
+          </div>
+
+
+
+          <!-- RADAR DATA -->
+
+          <div class="radar-data data-top-left">
+
+            <span>
+              N1
+            </span>
+
+            <strong>
+              72%
+            </strong>
+
+          </div>
+
+
+          <div class="radar-data data-top-right">
+
+            <span>
+              N2
+            </span>
+
+            <strong>
+              68%
+            </strong>
+
+          </div>
+
+
+          <div class="radar-data data-bottom-left">
+
+            <span>
+              EGT
+            </span>
+
+            <strong>
+              00°C
+            </strong>
+
+          </div>
+
+
+          <div class="radar-data data-bottom-right">
+
+            <span>
+              FADEC
+            </span>
+
+            <strong>
+              ONLINE
+            </strong>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         LOWER INFORMATION
+    ====================================================== -->
+
+    <section class="lower-panel">
+
+
+      <div class="info-block">
+
+        <span class="info-title">
+          SYSTEM
+        </span>
+
+        <strong>
+          FADEC / MCDU
+        </strong>
+
+      </div>
+
+
+      <div class="info-block">
+
+        <span class="info-title">
+          MODE
+        </span>
+
+        <strong>
+          EDUCATIONAL CBT
+        </strong>
+
+      </div>
+
+
+      <div class="info-block">
+
+        <span class="info-title">
+          INTERFACE
+        </span>
+
+        <strong>
+          ENGINE PARAMETERS
+        </strong>
+
+      </div>
+
+
+      <div class="info-block">
+
+        <span class="info-title">
+          STATUS
+        </span>
+
+        <strong class="status-ready">
+          ● READY
+        </strong>
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DISCLAIMER
+    ====================================================== -->
+
+    <footer class="home-footer">
+
+      <div class="footer-line"></div>
+
+
+      <p>
+
+        Educational simulation.
+        All thresholds and formulas are illustrative
+        training values, not certified engine performance data.
+
+      </p>
+
+
+      <div class="footer-meta">
+
+        <span>
+          DPR AVIATION COLLEGE
+        </span>
+
+        <span>
+          •
+        </span>
+
+        <span>
+          FADEC + MCDU
+        </span>
+
+        <span>
+          •
+        </span>
+
+        <span>
+          ENGINE CBT SIMULATOR
+        </span>
+
+      </div>
+
+    </footer>
+
+
+  </main>
+
+
+
+  <!-- =====================================================
+       LOADING SCREEN
+  ====================================================== -->
+
+  <section
+    id="loadingScreen"
+    class="loading-screen"
+  >
+
+
+    <div class="loading-grid"></div>
+
+
+    <div class="loading-content">
+
+
+      <div class="loading-brand">
+
+        <div class="loading-project-logo">
+          <img
+            src="logo.png"
+            alt="AMT 102 Project Making logo"
+          >
+        </div>
+
+        <div class="loading-symbol">
+
+          <svg
+            viewBox="0 0 80 46"
+          >
+
+            <path
+              d="M4 13C20 13 28 8 39 3L72 3 56 13 29 18 11 17Z"
+            />
+
+            <path
+              d="M12 23C28 23 38 19 50 14L67 14 51 24 28 29 12 28Z"
+            />
+
+            <path
+              d="M20 33C34 33 42 29 52 25L62 25 49 34 31 39 20 38Z"
+            />
+
+          </svg>
+
+        </div>
+
+
+        <span>
+          DPR AVIATION COLLEGE
+        </span>
+
+      </div>
+
+
+
+      <div class="loading-radar">
+
+        <div class="loading-circle circle-a"></div>
+
+        <div class="loading-circle circle-b"></div>
+
+        <div class="loading-circle circle-c"></div>
+
+        <div class="loading-line"></div>
+
+        <div class="loading-center"></div>
+
+      </div>
+
+
+
+      <div class="loading-title">
+
+        FADEC + MCDU
+
+      </div>
+
+
+      <div class="loading-subtitle">
+
+        ENGINE CBT SIMULATOR
+
+      </div>
+
+
+      <div
+        id="loadingStatus"
+        class="loading-status"
+      >
+
+        INITIALIZING FADEC
+
+      </div>
+
+
+
+      <div class="loading-progress-container">
+
+        <div
+          id="loadingProgress"
+          class="loading-progress"
+        ></div>
+
+      </div>
+
+
+      <div class="loading-percent">
+
+        <span id="loadingPercent">
+          0%
+        </span>
+
+        <span>
+          LOADING SYSTEM
+        </span>
+
+      </div>
+
+
+      <div class="loading-checks">
+
+        <span>
+          ● FADEC CORE
+        </span>
+
+        <span>
+          ● MCDU
+        </span>
+
+        <span>
+          ● SENSOR NETWORK
+        </span>
+
+      </div>
+
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- =====================================================
+       HOME SCREEN JAVASCRIPT
+  ====================================================== -->
+
+  <script>
+
+    const enterButton =
+      document.getElementById(
+        "enterSimulatorBtn"
+      );
+
+
+    const homeScreen =
+      document.getElementById(
+        "homeScreen"
+      );
+
+
+    const loadingScreen =
+      document.getElementById(
+        "loadingScreen"
+      );
+
+
+    const loadingProgress =
+      document.getElementById(
+        "loadingProgress"
+      );
+
+
+    const loadingPercent =
+      document.getElementById(
+        "loadingPercent"
+      );
+
+
+    const loadingStatus =
+      document.getElementById(
+        "loadingStatus"
+      );
+
+
+    const loadingMessages = [
+
+      "INITIALIZING FADEC",
+
+      "LOADING ENGINE PARAMETERS",
+
+      "CONNECTING MCDU",
+
+      "CHECKING SENSOR INPUTS",
+
+      "LOADING TRAINING LOGIC",
+
+      "VERIFYING SYSTEM STATUS",
+
+      "MCDU LINK ESTABLISHED",
+
+      "FADEC SYSTEM READY"
+
+    ];
+
+
+    // Welcome audio is intentionally NOT played on the home page.
+    // It is triggered by script.js when the simulator is entered.
+
+    enterButton.addEventListener(
+      "click",
+      function () {
+
+        const enterAudio = new Audio("sounds/simulator_enter.wav");
+        enterAudio.volume = 0.7;
+        enterAudio.play().catch(() => {});
+
+        const loadingAmbient = new Audio("sounds/loading_ambient.wav");
+        loadingAmbient.loop = true;
+        loadingAmbient.volume = 0.34;
+        loadingAmbient.play().catch(() => {});
+
+        enterButton.disabled =
+          true;
+
+
+        homeScreen.classList.add(
+          "home-exit"
+        );
+
+
+        setTimeout(
+          function () {
+
+            homeScreen.style.display =
+              "none";
+
+            loadingScreen.classList.add(
+              "loading-active"
+            );
+
+          },
+          700
+        );
+
+
+        let progress =
+          0;
+
+
+        let messageIndex =
+          0;
+
+
+        const loadingTimer =
+          setInterval(
+            function () {
+
+
+              progress += 1;
+
+
+              loadingProgress.style.width =
+                progress + "%";
+
+
+              loadingPercent.textContent =
+                progress + "%";
+
+
+              const messagePosition =
+                Math.floor(
+                  (
+                    progress /
+                    100
+                  ) *
+                  loadingMessages.length
+                );
+
+
+              if (
+                messagePosition !==
+                messageIndex &&
+                messagePosition <
+                loadingMessages.length
+              ) {
+
+                messageIndex =
+                  messagePosition;
+
+
+                loadingStatus.textContent =
+                  loadingMessages[
+                    messageIndex
+                  ];
+
+              }
+
+
+              if (
+                progress >=
+                100
+              ) {
+
+
+                clearInterval(
+                  loadingTimer
+                );
+
+                try {
+                  loadingAmbient.pause();
+                  loadingAmbient.currentTime = 0;
+                } catch (error) {}
+
+                loadingStatus.textContent =
+                  "SIMULATOR READY";
+
+
+                setTimeout(
+                  function () {
+
+                    window.location.href =
+                      "simulator.html";
+
+                  },
+                  650
+                );
+
+              }
+
+            },
+            35
+          );
+
+      });
+
+  </script>
+
+
+</body>
+
+</html>
